@@ -1,47 +1,47 @@
+/**
+ * CREACION DE VARIABLES Y SOLICITUDES DE ARCHIVOS
+ */
+
 require('./config/config');
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const bodyParser = require('body-parser');
 
-// parse application/x-www-form-urlencoded
+/**
+ * PARSE APPLICATION/x-www-form-urlencoded
+ */
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// parse application/json
+/**
+ * PARSE PARA APLICATION/CONTENT JSON
+ */
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
-    res.json('Hello World');
-});
 
-app.get('/usuario', (req, res) => {
-    res.json('get Usuario');
-});
+/**
+ * IMPORTAR ROUTES
+ */
+app.use(require('./routes/usuario'));
 
-app.post('/usuario', (req, res) => {
-    let body = req.body;
-    if (body.nombre === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario'
-        });
-    } else {
-        res.json({
-            persona: body
-        });
-    }
-});
-
-app.put('/usuario/:id', (req, res) => {
-    let id = req.params.id;
-    res.json({
-        id
+/**
+ * CONEXION A LA BASE DE DATOS
+ */
+mongoose.connect(process.env.URLDB, {
+        useCreateIndex: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
+    },
+    (err, res) => {
+        if (err) throw err;
+        console.log('Base de datos conectada');
     });
-});
 
-app.delete('/usuario', (req, res) => {
-    res.json('delete Usuario');
-});
 
+/**
+ * PUERTO DEL SERVER
+ */
 app.listen(process.env.PORT, () => {
     console.log(`Escuchando por el puerto: ${process.env.PORT}`);
 });
