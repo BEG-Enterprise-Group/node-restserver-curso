@@ -26,18 +26,8 @@ let verificaToken = (req, res, next) => {
 
 let verificaAdminRol = (req, res, next) => {
     let usuario = req.usuario;
-    let id = req.params.id;
     if (usuario.role === 'ADMIN_ROLE') {
-        if (id === req.usuario._id) {
-            return res.status(401).json({
-                ok: false,
-                err: {
-                    message: 'No se puede cambiar el rol de su mismo usuario debe Hacerlo un SuperAdministrador'
-                }
-            });
-        } else {
-            next();
-        }
+        next();
     } else {
         return res.status(401).json({
             ok: false,
