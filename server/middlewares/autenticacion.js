@@ -26,8 +26,18 @@ let verificaToken = (req, res, next) => {
 
 let verificaAdminRol = (req, res, next) => {
     let usuario = req.usuario;
+    let id = req.params.id;
     if (usuario.role === 'ADMIN_ROLE') {
-        next();
+        if (id === req.usuario._id) {
+            return res.status(401).json({
+                ok: false,
+                err: {
+                    message: 'No se puede cambiar el rol de su mismo usuario debe Hacerlo un SuperAdministrador'
+                }
+            });
+        } else {
+            next();
+        }
     } else {
         return res.status(401).json({
             ok: false,
@@ -39,9 +49,27 @@ let verificaAdminRol = (req, res, next) => {
 
 };
 
+/**
+ * VERIFICAR QUE NO SE MODIFIQUEN LA INTEGRIDAD DE DATOS DE UN MISMO USUARIO
+ */
+
+let verificarUsuario = (req, res, next) => {
+    let id = req.params.id;
+    if (id === req.usuario._id) {
+        return res.status(401).json({
+            ok: false,
+            err: {
+                message: 'No se puede cambiar el rol de su mismo usuario debe Hacerlo un SuperAdministrador'
+            }
+        });
+    } else {
+        next();
+    }
+};
 
 
 module.exports = {
     verificaToken,
-    verificaAdminRol
+    verificaAdminRol,
+    verificarUsuario
 };
