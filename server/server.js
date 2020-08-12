@@ -20,9 +20,9 @@ app.use(bodyParser.json())
 
 
 /**
- * IMPORTAR ROUTES
+ * CONFIGURACION GLOBAL DE LAS RUTAS
  */
-app.use(require('./routes/usuario'));
+app.use(require('./routes/index'));
 
 /**
  * CONEXION A LA BASE DE DATOS
