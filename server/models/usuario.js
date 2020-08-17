@@ -38,6 +38,9 @@ let usuarioSchema = new Schema({
         default: false
     }
 });
+/**
+ * PARA NO DEVOLVER LA CONTRASEÑA AL USUARIO
+ */
 usuarioSchema.methods.toJSON = function() {
     let user = this;
     let userObject = user.toObject();
@@ -45,4 +48,4 @@ usuarioSchema.methods.toJSON = function() {
     return userObject;
 }
 usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe de ser unico' });
-module.exports = mongoose.model('usuario', usuarioSchema);
+module.exports = mongoose.model('Usuario', usuarioSchema);

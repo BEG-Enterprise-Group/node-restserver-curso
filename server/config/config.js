@@ -25,7 +25,7 @@ process.env.URLDB = urlDB;
 /**
  * VENCIMIENTO DEL TOKEN 60 * 60 * 24 * 30
  */
-process.env.EXPIRACION_TOKEN = 60 * 60 * 24 * 30;
+process.env.EXPIRACION_TOKEN = '48h';
 
 
 /**
