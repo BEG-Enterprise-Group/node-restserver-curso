@@ -5,10 +5,6 @@ const Usuario = require('../models/usuario');
 const { verificaToken, verificaAdminRol, verificarUsuario } = require('../middlewares/autenticacion');
 const app = express();
 
-app.get('/', (req, res) => {
-    res.json('Hello World');
-});
-
 app.get('/usuario', verificaToken, (req, res) => {
     let status = req.query.status || true;
     let estadoStatus = {

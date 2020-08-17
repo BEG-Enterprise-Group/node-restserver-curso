@@ -32,3 +32,14 @@ process.env.EXPIRACION_TOKEN = 60 * 60 * 24 * 30;
  * SEMILLA DE AUTENTICACION
  */
 process.env.SEMILLA_AUTENTICACION = process.env.SEMILLA_AUTENTICACION || 'este-es-el-seed-desarrollo';
+
+/**
+ * GOOGLE CLIENT ID
+ */
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '840553277222-ammujd3govoikicun3bn66nhs31ttbg1.apps.googleusercontent.com'
+
+/**
+ * PASSWORD DE GOOGLE
+ */
+process.env.PASS_GOOGLE = ':)';
