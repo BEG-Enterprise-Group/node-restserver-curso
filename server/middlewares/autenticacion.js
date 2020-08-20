@@ -58,8 +58,31 @@ let verificarUsuario = (req, res, next) => {
 };
 
 
+/**
+ * VERIFICA TOKEN PARA IMAGENES
+ */
+
+let verificaTokenImg = (req, res, next) => {
+    let token = req.query.token;
+    jwt.verify(token, process.env.SEMILLA_AUTENTICACION, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({
+                ok: false,
+                err: {
+                    message: 'Error de Autenticación de usuario'
+                }
+            });
+        }
+        req.usuario = decoded.usuario;
+        next();
+    });
+
+};
+
+
 module.exports = {
     verificaToken,
     verificaAdminRol,
-    verificarUsuario
+    verificarUsuario,
+    verificaTokenImg
 };
